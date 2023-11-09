@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://crispychris:<password>@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://crispychris:dontpushmongobro>@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority";
 
 
 // const MongoClient = require('mongodb').MongoClient
@@ -27,9 +27,9 @@ app.listen(3000, function () {
 // })
 
 // using an es6 arrow function:
-app.get('/', (req, res) => {
-  res.send('Hello, world!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello, world!')
+// })
 
 // app.get('/test-page', (req, res) => {
 //   res.send('Gotta catch em all, Pokemon!')
@@ -37,9 +37,9 @@ app.get('/', (req, res) => {
 
 
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html')
-// })
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
 
 // testing 
 // app.get('/pokemon', (req, res) => {
@@ -58,27 +58,29 @@ app.post('/quotes', (req, res) => {
 
 
 
-// const connectionString = 'mongodb+srv://crispychris:dontpushmongobro@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://crispychris:dontpushmongobro@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority'
 
-// MongoClient.connect(
-//   connectionString,
-//   {
-//     useUnifiedTopology: true,
-//   },
-//    (err, client) => {
+MongoClient.connect(
+  connectionString,
+  {
+    //we dont need the below line. it is deprecated
+    // useUnifiedTopology: true,
+  },
+   (err, client) => {
 
-//   if (err) return console.error(err)
-//   console.log('Connected to database')
-
-// })
-
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-}, (err, client) => {
   if (err) return console.error(err)
   console.log('Connected to database')
-});
+
+})
+
+// const client = new MongoClient(uri, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   }
+// },
+//  (err, client) => {
+//   if (err) return console.error(err)
+//   console.log('Connected to database')
+// });
