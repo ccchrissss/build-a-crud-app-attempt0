@@ -2,12 +2,30 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://crispychris:dontpushmongobro>@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority";
+// const uri = "mongodb+srv://crispychris:dontpushmongobro>@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority";
+const connectionString = 'mongodb+srv://crispychris:dontpushmongobro@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority'
 
 
 // const MongoClient = require('mongodb').MongoClient
 
 const app = express()
+
+MongoClient.connect( connectionString )
+  // {
+     //we dont need the below line. it is deprecated
+     // useUnifiedTopology: true,
+  // },
+  .then( client => {
+    console.log('connected to database')
+    const db = client.db('star-wars-quotes')
+    const quotesCollection = db.collection('quotes')
+
+    app.use()
+    app.get()
+    app.post()
+    app.listen()
+  })
+  .catch( error => console.error(error))
 
 
 
@@ -54,24 +72,20 @@ app.get('/', (req, res) => {
 
 app.post('/quotes', (req, res) => {
   console.log(req.body)
+  quotesCollection
+    .insertOne(req.body)
+    .then(results => {
+      console.log(result)
+    })
+    .catch(error => console.error(error))
 })
 
 
 
-const connectionString = 'mongodb+srv://crispychris:dontpushmongobro@cluster0.wpctn92.mongodb.net/?retryWrites=true&w=majority'
 
-MongoClient.connect(
-  connectionString,
-  {
-    //we dont need the below line. it is deprecated
-    // useUnifiedTopology: true,
-  },
-   (err, client) => {
 
-  if (err) return console.error(err)
-  console.log('Connected to database')
 
-})
+
 
 // const client = new MongoClient(uri, {
 //   serverApi: {
